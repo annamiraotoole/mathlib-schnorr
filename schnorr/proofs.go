@@ -60,7 +60,7 @@ func VerifyProofG1(c *ml.Curve, pg1 *ProofG1, R *ml.G1, bases []*ml.G1, challPro
 	points := append(bases, R)
 	scalars := append(pg1.Responses, challenge)
 
-	contribution := sumOfG1Products(points, scalars)
+	contribution := SumOfG1Products(points, scalars)
 	contribution.Sub(pg1.Commitment)
 
 	return contribution.IsInfinity()
@@ -177,27 +177,9 @@ func (pc *ProverCommittingG1) Commit(c *ml.Curve, rng io.Reader, base *ml.G1) {
 	pc.BlindingFactors = append(pc.BlindingFactors, r)
 }
 
-func sumOfG1Products(bases []*ml.G1, scalars []*ml.Zr) *ml.G1 {
-	var res *ml.G1
-
-	for i := 0; i < len(bases); i++ {
-		b := bases[i]
-		s := scalars[i]
-
-		g := b.Mul(s.Copy())
-		if res == nil {
-			res = g
-		} else {
-			res.Add(g)
-		}
-	}
-
-	return res
-}
-
 // Finish helps to generate ProverCommittedG1 after commitment of all base points.
 func (pc *ProverCommittingG1) Finish() *ProverCommittedG1 {
-	commitment := sumOfG1Products(pc.bases, pc.BlindingFactors)
+	commitment := SumOfG1Products(pc.bases, pc.BlindingFactors)
 
 	return &ProverCommittedG1{
 		Bases:           pc.bases,
