@@ -13,7 +13,7 @@ type GenericChallProvider struct {
 	nonce      []byte
 }
 
-func NewChallProvider(curve *ml.Curve, commitment *ml.G1, bases []*ml.G1, nonce []byte) *GenericChallProvider {
+func NewChallengeProvider(curve *ml.Curve, commitment *ml.G1, bases []*ml.G1, nonce []byte) ChallengeProvider {
 	return &GenericChallProvider{
 		curve:      curve,
 		commitment: commitment,
