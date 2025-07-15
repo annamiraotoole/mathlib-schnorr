@@ -13,6 +13,15 @@ type GenericChallProvider struct {
 	nonce      []byte
 }
 
+func NewChallProvider(curve *ml.Curve, commitment *ml.G1, bases []*ml.G1, nonce []byte) *GenericChallProvider {
+	return &GenericChallProvider{
+		curve:      curve,
+		commitment: commitment,
+		bases:      bases,
+		nonce:      nonce,
+	}
+}
+
 func (p *GenericChallProvider) GetChallenge() *ml.Zr {
 	challengeBytes := make([]byte, 0)
 	// add bytes for every base
