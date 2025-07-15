@@ -103,14 +103,14 @@ func ParseProofG1(c *ml.Curve, bytes []byte) (*ProofG1, error) {
 	length := int(binary.BigEndian.Uint32(bytes[offset : offset+4]))
 	offset += 4
 
-	if len(bytes) < c.CompressedG1ByteSize+4+length*frCompressedSize {
+	if len(bytes) < c.CompressedG1ByteSize+4+length*FrCompressedSize {
 		return nil, errors.New("invalid size of G1 signature proof")
 	}
 
 	responses := make([]*ml.Zr, length)
 	for i := 0; i < length; i++ {
-		responses[i] = c.NewZrFromBytes(bytes[offset : offset+frCompressedSize])
-		offset += frCompressedSize
+		responses[i] = c.NewZrFromBytes(bytes[offset : offset+FrCompressedSize])
+		offset += FrCompressedSize
 	}
 
 	return NewProofG1(commitment, responses), nil

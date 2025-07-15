@@ -5,7 +5,7 @@ import (
 	"golang.org/x/crypto/blake2b"
 )
 
-const frCompressedSize = 32 // size of field element in bytes
+const FrCompressedSize = 32 // size of field element in bytes
 
 func SumOfG1Products(bases []*ml.G1, scalars []*ml.Zr) *ml.G1 {
 	var res *ml.G1
