@@ -150,7 +150,6 @@ func (g *ProverCommittedG1) GenerateProof(challenge *ml.Zr, secrets []*ml.Zr) *P
 	return &ProofG1{
 		Commitment: g.Commitment,
 		Responses:  responses,
-		Nonce:      nil,
 	}
 } ////////////////////////////////////////////////////////////////////////
 
