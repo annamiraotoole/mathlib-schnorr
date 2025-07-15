@@ -23,7 +23,6 @@ import (
 type ProofG1 struct {
 	Commitment *ml.G1
 	Responses  []*ml.Zr
-	Nonce      []byte
 }
 
 // NewProofG1 creates a new ProofG1.
@@ -31,7 +30,6 @@ func NewProofG1(commitment *ml.G1, responses []*ml.Zr) *ProofG1 {
 	return &ProofG1{
 		Commitment: commitment,
 		Responses:  responses,
-		Nonce:      nil, // DEVIATION FROM aries-bbs-go, so that we can add nonce later
 	}
 }
 
