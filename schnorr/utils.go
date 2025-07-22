@@ -39,12 +39,6 @@ func CompareTwoPairings(curve *ml.Curve, p1 *ml.G1, q1 *ml.G2,
 	return p.IsUnity()
 }
 
-func IsZero(c *ml.Curve, z *ml.Zr) bool {
-	zero := c.NewZrFromBytes([]byte("0"))
-	zero = zero.Minus(zero)
-	return z.Equals(zero)
-}
-
 func NonceToFrBytes(curve *ml.Curve, nonce []byte) []byte {
 	fieldElem := FrFromOKM(curve, nonce)
 	return fieldElem.Bytes()
